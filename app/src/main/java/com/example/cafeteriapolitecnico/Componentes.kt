@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -39,6 +40,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Check
 
 @Composable
 fun ImagenPoli(modifier: Modifier = Modifier){
@@ -53,7 +57,7 @@ fun ImagenPoli(modifier: Modifier = Modifier){
 fun Titulo(modifier: Modifier = Modifier){
     Text("Cafetería Politécnico",
         textAlign = TextAlign.Center,
-        color = Color.Cyan,
+        color = Color(0xFF42559E),
         fontSize = 25.sp,
         fontWeight = FontWeight.Bold)
 }
@@ -167,7 +171,7 @@ fun AñadirPedido(
         onClick = onButtonClick,
         modifier = modifier
     ) {
-        Text(text = "Añadir Pedido (${total.toInt()})")
+        Text(text = "Añadir Pedido (${total.toInt()} €)")
     }
 }
 
@@ -189,12 +193,9 @@ fun PedidoCard(producto: Producto, cantidad: Int, modifier: Modifier = Modifier)
         modifier = modifier
             .fillMaxWidth()
             .padding(10.dp),
-        // Mantenemos el estilo de tu ejemplo
-        shape = CircleShape,
-        border = BorderStroke(2.dp, Color.Blue),
+        shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
-            contentColor = Color.Black,
-            containerColor = Color(0xFF7BE0AE)
+            contentColor = Color.Black
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 16.dp)
     ) {
@@ -202,7 +203,6 @@ fun PedidoCard(producto: Producto, cantidad: Int, modifier: Modifier = Modifier)
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.padding(16.dp)
         ) {
-            // 1. Foto del producto
             Image(
                 painter = painterResource(id = producto.imagenResId),
                 contentDescription = null,
@@ -214,20 +214,18 @@ fun PedidoCard(producto: Producto, cantidad: Int, modifier: Modifier = Modifier)
 
             Spacer(modifier = Modifier.width(12.dp))
 
-            // 2. Cantidad x Nombre del producto
             Text(
                 text = "$cantidad x ${producto.nombre}",
-                modifier = Modifier.weight(1f), // Ocupa el espacio central
+                modifier = Modifier.weight(1f),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
             )
 
-            // 3. Precio total (Precio unitario * cantidad)
             Text(
                 text = "${(producto.precio * cantidad).toInt()}€",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.Blue
+                color = Color(0xFF42559E)
             )
         }
     }
@@ -239,8 +237,7 @@ fun BotonConfirmar(onClick: () -> Unit = {}, modifier: Modifier = Modifier) {
         onClick = onClick,
         modifier = modifier
             .width(250.dp)
-            .height(50.dp),
-        border = BorderStroke(2.dp, Color.Cyan)
+            .height(50.dp)
     ) {
         Text(
             text = "Finalizar Compra",
@@ -262,16 +259,14 @@ fun MyDialog(
             confirmButton = {
                 Button(onClick = onDismiss) { Text("Aceptar") }
             },
-            dismissButton = {
-                Button(onClick = onDismiss) { Text("Cancelar") }
-            },
             title = { Text("Confirmación del pedido") },
             text = { Text("Gracias por realizar un pedido en la Cafetería del Politécnico") },
             icon = {
                 Icon(
-                    painter = painterResource(R.drawable.poli),
-                    contentDescription = null,
-                    modifier = Modifier.size(50.dp)
+                    imageVector = Icons.Default.Check,
+                    contentDescription = "Éxito",
+                    modifier = Modifier.size(100.dp),
+                    tint = Color.Blue
                 )
             },
             shape = RectangleShape

@@ -17,8 +17,8 @@ data class ItemPedido(
 
 
 val productos = listOf(
-    Producto("Bocadillo Jamón", 10.0, R.drawable.poli),
-    Producto("Bocadillo Tortilla", 10.0, R.drawable.poli),
-    Producto("Bocadillo Mixto", 10.0, R.drawable.poli),
-    Producto("Bocadillo Queso", 10.0, R.drawable.poli)
+    Producto("Bocadillo Jamón", 10.0, R.drawable.jamon),
+    Producto("Bocadillo Tortilla", 10.0, R.drawable.tortilla),
+    Producto("Bocadillo Mixto", 10.0, R.drawable.mixto),
+    Producto("Bocadillo Queso", 10.0, R.drawable.queso)
 )
